@@ -1,0 +1,12 @@
+package main
+
+type Album {
+  id: Int!
+  title: String!
+  artist: String!
+  price: Float!
+}
+
+type Query {
+  albums: [Album!]!
+}
