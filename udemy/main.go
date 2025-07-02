@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/mattfranciswork0/go-stuff/rest"
+
+	"github.com/mattfranciswork0/go/rest"
 )
 
 type contactInfo struct {
@@ -32,7 +33,7 @@ func main() {
 	jim.print()
 	// runMapExample()
 	//runChannels()
-	runDB()
+	rest.RunDB()
 }
 
 func (pointerToPerson *person) updateName(newFirstName string) {

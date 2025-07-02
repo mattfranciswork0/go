@@ -12,7 +12,7 @@ import (
 
 //Package handling with go: https://www.youtube.com/watch?v=20sLKEpHvvk
 
-func runDB() {
+func RunDB() {
 	godotenv.Load()
 	// urlExample := "postgres://username:password@localhost:5432/database_name"
 	fmt.Printf("hi: %s\n", os.Getenv("DATABASE_URL"))

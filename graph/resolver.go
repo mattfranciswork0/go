@@ -1,6 +1,6 @@
 package graph
 
-import "github.com/mattfranciswork0/go-stuff/graph/model"
+import "github.com/mattfranciswork0/go/graph/model"
 
 // This file will not be regenerated automatically.
 //

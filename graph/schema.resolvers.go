@@ -8,7 +8,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/mattfranciswork0/go-stuff/graph/model"
+	"github.com/mattfranciswork0/go/graph/model"
 )
 
 // CreateTodo is the resolver for the createTodo field.

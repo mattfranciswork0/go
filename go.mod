@@ -1,4 +1,4 @@
-module github.com/mattfranciswork0/go-stuff
+module github.com/mattfranciswork0/go
 
 go 1.24.4
 
