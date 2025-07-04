@@ -1,11 +1,13 @@
 package graph
 
-import "github.com/mattfranciswork0/go/graph/model"
+import (
+	"github.com/mattfranciswork0/go/graph/model"
+)
 
 // This file will not be regenerated automatically.
 //
 // It serves as dependency injection for your app, add any dependencies you require here.
 
 type Resolver struct {
-	TodoList []*model.Todo
+	Album []*model.Album
 }

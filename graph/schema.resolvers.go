@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/mattfranciswork0/go/db"
 	"github.com/mattfranciswork0/go/graph/model"
 )
 
@@ -18,12 +19,27 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	return r.TodoList, nil
+	panic(fmt.Errorf("not implemented: Todos - todos"))
 }
 
-// Albums is the resolver for the albums field.
+// This file will not be regenerated automatically.
+//
+// It serves as dependency injection for your app, add any dependencies you require here.
 func (r *queryResolver) Albums(ctx context.Context) ([]*model.Album, error) {
-	panic(fmt.Errorf("not implemented: Albums - albums"))
+	albums, err := db.GetAlbums(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var gqlAlbums []*model.Album
+	for _, u := range albums {
+		gqlAlbums = append(gqlAlbums, &model.Album{
+			ID: u.ID,
+		})
+	}
+
+	return gqlAlbums, nil
 }
 
 // Mutation returns MutationResolver implementation.
