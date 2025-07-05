@@ -31,48 +31,15 @@ func GetAlbums(ctx context.Context) ([]model.Album, error) {
 	return albums, nil
 }
 
-// func GetUsers(ctx context.Context) ([]*model.DBUser, error) {
-// 	// rows, err := Pool.Query(ctx, "SELECT id, name, email FROM users")
-// 	// if err != nil {
-// 	// 	return nil, err
-// 	// }
-// 	// defer rows.Close()
+func CreateAlbum(ctx context.Context, title string, artist string, price float64) (*model.Album, error) {
+	var album model.Album
+	fmt.Println("Artists", artist, &album.Artist)
+	err := Pool.QueryRow(ctx,
+		"INSERT INTO albums  (title, artist, price) VALUES ($1, $2, 11.1) RETURNING title, artist, price",
+		title, artist, price).Scan(&album.Title, &album.Artist, &album.Price)
 
-// 	// var users []*model.DBUser
-// 	// for rows.Next() {
-// 	// 	var u model.DBUser
-// 	// 	if err := rows.Scan(&u.ID, &u.Name, &u.Email); err != nil {
-// 	// 		return nil, err
-// 	// 	}
-// 	// 	users = append(users, &u)
-// 	// }
-// 	var title string
-// 	// var weight int64
-// 	// err = conn.QueryRow(context.Background(), "select name, weight from widgets where id=$1", 42).Scan(&name, &weight)
-// 	err = conn.QueryRow(context.Background(), "select title from albums LIMIT 1").Scan(&title)
-// 	fmt.Println(title)
-// 	return title, nil
-// }
-
-// func GetUserByID(ctx context.Context, id int) (*model.DBUser, error) {
-// 	var u model.DBUser
-// 	err := Pool.QueryRow(ctx, "SELECT id, name, email FROM users WHERE id=$1", id).
-// 		Scan(&u.ID, &u.Name, &u.Email)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return &u, nil
-// }
-
-// func CreateUser(ctx context.Context, name, email string) (*model.DBUser, error) {
-// 	var u model.DBUser
-// 	err := Pool.QueryRow(ctx,
-// 		"INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id, name, email",
-// 		name, email,
-// 	).Scan(&u.ID, &u.Name, &u.Email)
-
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return &u, nil
-// }
+	if err != nil {
+		return nil, err
+	}
+	return &album, nil
+}

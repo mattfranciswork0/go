@@ -7,6 +7,7 @@ package graph
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"github.com/mattfranciswork0/go/db"
 	"github.com/mattfranciswork0/go/graph/model"
@@ -17,14 +18,32 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
 }
 
+// CreateAlbum is the resolver for the createAlbum field.
+func (r *mutationResolver) CreateAlbum(ctx context.Context, title string, artist string, price *float64) (*model.Album, error) {
+	albums, err := db.CreateAlbum(ctx, title, artist, 11.1)
+	fmt.Println("Albums", albums)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Fprintf(os.Stdout, "Album!!: %+v\n", &model.Album{
+		Title:  title,
+		Artist: artist,
+		Price:  11.1,
+	})
+
+	return &model.Album{
+		Title:  title,
+		Artist: artist,
+		Price:  11.1,
+	}, nil
+}
+
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	panic(fmt.Errorf("not implemented: Todos - todos"))
 }
 
-// This file will not be regenerated automatically.
-//
-// It serves as dependency injection for your app, add any dependencies you require here.
+// Albums is the resolver for the albums field.
 func (r *queryResolver) Albums(ctx context.Context) ([]*model.Album, error) {
 	albums, err := db.GetAlbums(ctx)
 
